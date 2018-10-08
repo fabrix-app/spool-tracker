@@ -1,0 +1,1 @@
+export { trackerConfig } from './trackerConfig'
