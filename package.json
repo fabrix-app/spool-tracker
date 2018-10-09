@@ -1,6 +1,6 @@
 {
   "name": "@fabrix/spool-tracker",
-  "version": "1.5.0-alpha.1",
+  "version": "1.5.0",
   "description": "Spool: Tracker for Fabrix to implement HashiCorp's https://trackerproject.io/",
   "homepage": "https://fabrix.app",
   "author": {
