@@ -41,7 +41,11 @@ For more information about store (type and configuration) please see the tracker
 
 ## Usage
 
-```js
+```html
+
+<a href="https://<your_website>/resource/<resource_token>/click?url=<the_link>">
+  <img src="https://<your_website>/resource/<resource_token>/impression?url=https://<your_image_url>" alt="Ad Sample">
+</a>
 
 ```
 
