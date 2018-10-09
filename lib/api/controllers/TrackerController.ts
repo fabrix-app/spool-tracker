@@ -16,14 +16,11 @@ export class TrackerController extends Controller {
       req.body.id = req.params.id
     }
 
-    const options = {
-      url: req.query.url
-    }
-
-    console.log('BRK', options)
-
     this.app.services.TrackerResourceService.impression(req, {})
       .then(result => {
+        const options = {
+          url: req.query.url || result.asset
+        }
         return proxy(options)(req, res, done)
       })
       .catch(err => {
@@ -43,7 +40,10 @@ export class TrackerController extends Controller {
 
     this.app.services.TrackerResourceService.click(req, {})
       .then(result => {
-        return res.redirect(req.query.url)
+        const options = {
+          url: req.query.url || result.refer_url
+        }
+        return res.redirect(options.url)
       })
       .catch(err => {
         return res.serverError(err)

@@ -7,7 +7,7 @@ export class TrackerResourceService extends Service {
   impression(req, options: {[key: string]: any} = {}) {
     //
     options = {
-      attributes: ['id', 'impressions'],
+      attributes: ['id', 'impressions', 'asset'],
       ...options
     }
     return this.app.models.TrackerResource.resolve(req.body, options)
@@ -20,6 +20,13 @@ export class TrackerResourceService extends Service {
           type: 'impression',
           client_details: req.body.client_details
         }, { transaction: options.transaction || null})
+          .then(() => {
+            return _resource
+          })
+          .catch(err => {
+            this.app.log.error(err)
+            return _resource
+          })
       })
   }
 
@@ -29,7 +36,7 @@ export class TrackerResourceService extends Service {
   click(req, options: {[key: string]: any} = {}) {
     //
     options = {
-      attributes: ['id', 'clicks'],
+      attributes: ['id', 'clicks', 'refer_url'],
       ...options
     }
     return this.app.models.TrackerResource.resolve(req.body, options)
@@ -42,6 +49,13 @@ export class TrackerResourceService extends Service {
           type: 'click',
           client_details: req.body.client_details
         }, { transaction: options.transaction || null})
+          .then(() => {
+            return _resource
+          })
+          .catch(err => {
+            this.app.log.error(err)
+            return _resource
+          })
       })
   }
 
