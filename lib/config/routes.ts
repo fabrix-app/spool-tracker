@@ -1,7 +1,9 @@
 import * as joi from 'joi'
 
+import { resource } from '../schemas'
+
 export const routes = {
-  '/resource/:id': {
+  '/resource/:id/impression': {
     'GET': {
       handler: 'TrackerController.impression',
       prefix: 'tracker.prefix',
@@ -13,12 +15,62 @@ export const routes = {
               joi.number(),
               joi.string()
             )
+          },
+          payload: resource.impression,
+          query: {
+            url: joi.string()
+          }
+        },
+        app: {
+          permissions: {
+            resource_name: 'apiGetResourceIdImpressionRoute',
+            roles: ['admin', 'registered', 'public']
+          }
+        }
+      }
+    }
+  },
+  '/resource/:id': {
+    'GET': {
+      handler: 'TrackerController.findOne',
+      prefix: 'tracker.prefix',
+      config: {
+        validate: {
+          params: {
+            id: joi.alternatives().try(
+              joi.number(),
+              joi.string()
+            )
           }
         },
         app: {
           permissions: {
             resource_name: 'apiGetResourceIdRoute',
-            roles: ['admin', 'registered', 'public']
+            roles: ['admin']
+          }
+        }
+      }
+    },
+    'PUT': {
+      handler: 'TrackerController.update',
+      prefix: 'tracker.prefix',
+      config: {
+        validate: {
+          params: {
+            id: joi.alternatives().try(
+              joi.number(),
+              joi.string()
+            )
+          },
+          payload: resource.update,
+          query: {
+            url: joi.string()
+          }
+        },
+        app: {
+          permissions: {
+            resource_name: 'apiPutResourceIdRoute',
+            roles: ['admin']
           }
         }
       }
@@ -35,13 +87,77 @@ export const routes = {
             id: joi.alternatives().try(
               joi.number(),
               joi.string()
-            )
+            ),
+            payload: resource.click
           }
         },
         app: {
           permissions: {
             resource_name: 'apiGetResourceIdClickRoute',
             roles: ['admin', 'registered', 'public']
+          }
+        }
+      }
+    }
+  },
+  '/resources': {
+    'GET': {
+      handler: 'TrackerController.findAll',
+      prefix: 'tracker.prefix',
+      config: {
+        validate: {
+          query: {
+            offset: joi.number(),
+            limit: joi.number(),
+            sort: joi.array().items(joi.array()),
+            where: joi.any().optional(),
+            include: joi.array().items(joi.string())
+          }
+        },
+        app: {
+          permissions: {
+            resource_name: 'apiGetResourcesRoute',
+            roles: ['admin']
+          }
+        }
+      }
+    },
+    'POST': {
+      handler: 'TrackerController.create',
+      prefix: 'tracker.prefix',
+      config: {
+        validate: {
+          //
+          payload: resource.create
+        },
+        app: {
+          permissions: {
+            resource_name: 'apiPostResourcesRoute',
+            roles: ['admin']
+          }
+        }
+      }
+    }
+  },
+  '/resources/search': {
+    'GET': {
+      handler: 'TrackerController.search',
+      prefix: 'tracker.prefix',
+      config: {
+        validate: {
+          query: {
+            offset: joi.number(),
+            limit: joi.number(),
+            sort: joi.array().items(joi.array()),
+            where: joi.any().optional(),
+            term: joi.any(),
+            include: joi.array().items(joi.string())
+          }
+        },
+        app: {
+          permissions: {
+            resource_name: 'apiGetResourcesSearchRoute',
+            roles: ['admin']
           }
         }
       }

@@ -34,7 +34,10 @@
     "test"
   ],
   "dependencies": {
-    "joi": "^13.6.0"
+    "express-request-proxy": "^2.2.2",
+    "joi": "^13.6.0",
+    "lodash": "^4.17.11",
+    "shortid": "^2.2.13"
   },
   "devDependencies": {
     "@fabrix/fabrix": "^1.5.9",

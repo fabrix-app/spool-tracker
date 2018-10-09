@@ -7,5 +7,7 @@ describe('TrackerResource Model', () => {
   it('should exist', () => {
     TrackerResource = global.app.models['TrackerResource']
     assert(TrackerResource)
+    assert.ok(TrackerResource.resolve)
+    assert.ok(TrackerResource.resolveOrCreate)
   })
 })

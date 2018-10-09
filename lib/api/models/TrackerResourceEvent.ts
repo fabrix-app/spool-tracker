@@ -29,9 +29,12 @@ export class TrackerResourceEvent extends Model {
       tracker_resource_id: {
         type: Sequelize.INTEGER
       },
-      name: {
+
+      // impression/click
+      type: {
         type: Sequelize.STRING
       },
+
       client_details: {
         type: Sequelize.JSONB,
         defaultValue: {}
@@ -47,7 +50,7 @@ export class TrackerResourceEvent extends Model {
     //
     models.TrackerResourceEvent.belongsTo(models.TrackerResource, {
       //
-      foreignKey: 'tracker_resouce_id'
+      foreignKey: 'tracker_resource_id'
     })
   }
 }

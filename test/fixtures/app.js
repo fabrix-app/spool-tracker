@@ -11,15 +11,17 @@ module.exports = {
   },
   config: {
     stores: {
-      orm: 'sequelize',
-      database: 'Sequelize',
-      host: '127.0.0.1',
-      dialect: 'postgres',
-      logging: true,
-      migrate: 'drop'
+      postgres: {
+        orm: 'sequelize',
+        database: 'Sequelize',
+        host: '127.0.0.1',
+        dialect: 'postgres',
+        logging: true,
+        migrate: 'drop'
+      }
     },
     models: {
-      defaultStore: 'sqlitedev',
+      defaultStore: 'postgres',
       migrate: 'drop'
     },
     tracker: {
@@ -41,7 +43,7 @@ module.exports = {
           '404',
           '500'
         ],
-        static: require('express').static('test/static')
+        // static: require('express').static('test/static')
       }
     },
     session: {
