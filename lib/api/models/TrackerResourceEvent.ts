@@ -3,11 +3,11 @@ import { SequelizeResolver } from '@fabrix/spool-sequelize'
 // import { values } from 'lodash'
 // import { ACCOUNT_EVENT_TYPE } from '../../enums'
 /**
- * @module TrackerResource
+ * @module TrackerResourceEvent
  * @description Saves Account Balance updates to accounts/customer
 
  */
-export class TrackerResource extends Model {
+export class TrackerResourceEvent extends Model {
 
   static get resolver() {
     return SequelizeResolver
@@ -26,35 +26,11 @@ export class TrackerResource extends Model {
 
   static schema (app, Sequelize) {
     return {
+      tracker_resource_id: {
+        type: Sequelize.INTEGER
+      },
       name: {
         type: Sequelize.STRING
-      },
-      description: {
-        type: Sequelize.TEXT
-      },
-      asset: {
-        type: Sequelize.STRING
-      },
-      refer_url: {
-        type: Sequelize.STRING
-      },
-      // The amount of views/impressions
-      impressions: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
-      },
-      // The amount of interactions/clicks
-      clicks: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
-      },
-      value: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
-      },
-      metadata: {
-        type: Sequelize.JSONB,
-        defaultValue: {}
       },
       client_details: {
         type: Sequelize.JSONB,
@@ -69,5 +45,9 @@ export class TrackerResource extends Model {
    */
   public static associate(models) {
     //
+    models.TrackerResourceEvent.belongsTo(models.TrackerResource, {
+      //
+      foreignKey: 'tracker_resouce_id'
+    })
   }
 }

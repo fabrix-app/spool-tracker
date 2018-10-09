@@ -1,1 +1,1 @@
-export {}
+export { TrackerResourceService } from './TrackerResourceService'
