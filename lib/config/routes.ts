@@ -3,33 +3,6 @@ import * as joi from 'joi'
 import { resource } from '../schemas'
 
 export const routes = {
-  '/resource/:id/impression': {
-    'GET': {
-      handler: 'TrackerController.impression',
-      prefix: 'tracker.prefix',
-      config: {
-        pre: ['TrackerPolicy.impression'],
-        validate: {
-          params: {
-            id: joi.alternatives().try(
-              joi.number(),
-              joi.string()
-            )
-          },
-          payload: resource.impression,
-          query: {
-            url: joi.string()
-          }
-        },
-        app: {
-          permissions: {
-            resource_name: 'apiGetResourceIdImpressionRoute',
-            roles: ['admin', 'registered', 'public']
-          }
-        }
-      }
-    }
-  },
   '/resource/:id': {
     'GET': {
       handler: 'TrackerController.findOne',
@@ -95,6 +68,56 @@ export const routes = {
           permissions: {
             resource_name: 'apiGetResourceIdClickRoute',
             roles: ['admin', 'registered', 'public']
+          }
+        }
+      }
+    }
+  },
+  '/resource/:id/impression': {
+    'GET': {
+      handler: 'TrackerController.impression',
+      prefix: 'tracker.prefix',
+      config: {
+        pre: ['TrackerPolicy.impression'],
+        validate: {
+          params: {
+            id: joi.alternatives().try(
+              joi.number(),
+              joi.string()
+            )
+          },
+          payload: resource.impression,
+          query: {
+            url: joi.string()
+          }
+        },
+        app: {
+          permissions: {
+            resource_name: 'apiGetResourceIdImpressionRoute',
+            roles: ['admin', 'registered', 'public']
+          }
+        }
+      }
+    }
+  },
+  '/resource/:id/analytics': {
+    'GET': {
+      handler: 'TrackerController.analytics',
+      prefix: 'tracker.prefix',
+      config: {
+        pre: [],
+        validate: {
+          params: {
+            id: joi.alternatives().try(
+              joi.number(),
+              joi.string()
+            )
+          }
+        },
+        app: {
+          permissions: {
+            resource_name: 'apiGetResourceIdAnalyticsRoute',
+            roles: ['admin']
           }
         }
       }

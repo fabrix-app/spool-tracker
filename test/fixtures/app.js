@@ -54,6 +54,8 @@ module.exports = {
         require('@fabrix/spool-router').RouterSpool,
         require('@fabrix/spool-express').ExpressSpool,
         require('@fabrix/spool-sequelize').SequelizeSpool,
+        require('@fabrix/spool-crons').CronsSpool,
+        require('@fabrix/spool-analytics').AnalyticsSpool,
         require('../../dist').TrackerSpool
       ]
     }

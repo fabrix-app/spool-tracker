@@ -42,6 +42,8 @@
   "devDependencies": {
     "@fabrix/fabrix": "^1.5.9",
     "@fabrix/lint": "^1.0.0-alpha.3",
+    "@fabrix/spool-analytics": "^1.5.0",
+    "@fabrix/spool-crons": "^1.5.0",
     "@fabrix/spool-express": "^1.5.1",
     "@fabrix/spool-router": "^1.5.1",
     "@fabrix/spool-sequelize": "^1.5.1",

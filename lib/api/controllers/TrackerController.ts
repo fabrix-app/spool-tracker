@@ -199,4 +199,8 @@ export class TrackerController extends Controller {
         return res.serverError(err)
       })
   }
+
+  analytics(req, res) {
+    //
+  }
 }
